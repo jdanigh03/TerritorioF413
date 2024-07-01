@@ -1,0 +1,24 @@
+.contenedor-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo-gym {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-grow: 1; 
+  }
+  
+  .logo-image {
+    width: 150px; 
+    height: auto;
+    transition: transform 0.3s ease; 
+  }
+  
+  .logo-image:hover {
+    transform: scale(1.1); }
+  
