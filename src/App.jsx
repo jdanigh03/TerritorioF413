@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Cabecera from './componentes/general/Cabecera'
 import BarraNavegacion from './componentes/general/BarraNavegacion'
-import RedesSociales from './componentes/general/RedesSociales'
+import Footer from './componentes/general/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,7 +11,7 @@ function App() {
     <>
       <Cabecera/>
       <BarraNavegacion/>
-      <RedesSociales/>
+      <Footer/>
     </>
   )
 }
