@@ -1,24 +1,42 @@
 .contenedor-cabecera {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    padding: 20px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .logo-gym {
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    flex-grow: 1; 
-  }
-  
-  .logo-image {
-    width: 150px; 
-    height: auto;
-    transition: transform 0.3s ease; 
-  }
-  
-  .logo-image:hover {
-    transform: scale(1.1); }
-  
+  position: relative; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 20px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1; 
+  overflow: hidden; 
+}
+
+.contenedor-cabecera::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../assets/fondo_header.jpg'); 
+  background-size: cover; 
+  background-position: center; 
+  opacity: 0.2; 
+  z-index: -1; 
+}
+
+.logo-gym {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  flex-grow: 1; 
+  z-index: 2; 
+}
+
+.logo-image {
+  width: 150px; 
+  height: auto;
+  transition: transform 0.3s ease; 
+}
+
+.logo-image:hover {
+  transform: scale(1.1); 
+}

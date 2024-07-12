@@ -1,21 +1,15 @@
-/* BarraNavegacion.css */
-
 .barra-navegacion {
     position: relative;
     display: inline-block;
   }
   
   .dropdown-button {
-    background-color: #007bff; /* Color del botón */
-    color: white; /* Color del texto */
-    padding: 10px 20px; /* Espaciado interno */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
-  }
-  
-  .dropdown-button:hover {
-    background-color: #0056b3; /* Color al pasar el ratón por encima */
+    background-color: #cf5322; 
+    color: white; 
+    padding: 7px 15px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
   }
   
   .dropdown-menu {
@@ -23,23 +17,20 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white; /* Color de fondo del menú */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra del menú */
-    z-index: 1; /* Asegura que el menú aparezca encima de otros elementos */
-    min-width: 160px; /* Ancho mínimo del menú */
-    padding: 10px 0; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
+    background-color: #cf5322; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    z-index: 1; 
+    min-width: 160px; 
+    padding: 5px 0; 
+    border-radius: 5px; 
   }
   
   .dropdown-item {
     display: block;
-    padding: 10px 20px; /* Espaciado interno */
-    color: #333; /* Color del texto */
-    text-decoration: none; /* Sin subrayado */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    padding: 7px 15px; 
+    color: #000000; 
+    text-decoration: none; 
+    cursor: pointer; 
   }
   
-  .dropdown-item:hover {
-    background-color: #f8f9fa; /* Color al pasar el ratón por encima */
-  }
   

@@ -1,46 +1,58 @@
-/* Banner.css */
-
 .banner-container {
-    position: relative;
-    width: 100%;
-    height: 250px; /* Ajusta la altura según sea necesario */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .banner-content {
-    position: relative;
-    text-align: center;
-    flex-direction: row;
-    color: white;
-  }
-  
-  .contact-button {
-    background-color: #00FF00; /* Color verde */
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .contact-button:hover {
-    background-color: #00CC00; /* Oscurece un poco el verde al pasar el ratón */
-  }
-  
-  .banner-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
-  
-  .highlight {
-    color: #00FF00; /* Color verde para resaltar la palabra "USTED" */
-  }
-  
+  position: relative;
+  width: auto;
+  height: 150px; 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.banner-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-align: center; 
+  padding: 0 10px; 
+  top: 40px;
+}
+
+.contact-button {
+  background-color: #00FF00; 
+  color: black;
+  padding: 5px 10px; 
+  border: none;
+  border-radius: 5px; 
+  font-size: 0.6rem; 
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 70px;
+  margin-bottom: 10px; 
+  transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #00CC00; 
+}
+
+.banner-title {
+  font-size: 1.2rem; 
+  font-weight: bold;
+  line-height: 1.2; 
+  margin: 0;
+}
+
+.highlight {
+  color: #d0d3d0; 
+}
