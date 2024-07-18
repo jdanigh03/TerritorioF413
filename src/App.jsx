@@ -18,7 +18,7 @@ function App() {
       <br />
       <Banner/>
       <Publicaciones/>
-      <SubirPublicaciones/>
+      {/* <SubirPublicaciones/> */}
       <Footer/>
     </>
   )
