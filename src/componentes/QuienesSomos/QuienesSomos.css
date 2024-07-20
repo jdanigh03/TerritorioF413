@@ -1,0 +1,57 @@
+/* QuienesSomos.css */
+
+.quienes-somos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 40px;
+  }
+  
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    position: relative;
+  }
+  
+  .section-image {
+    width: 50%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .section-text {
+    width: 50%;
+    padding: 20px;
+    color: white; /* Ajustar el color según el fondo de la imagen */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para mejorar la legibilidad del texto */
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .section-image {
+      width: 100%;
+      filter: brightness(50%);
+    }
+  
+    .section-text {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      padding: 20px;
+      background-color: transparent; /* Elimina el fondo en la vista móvil */
+      border-radius: 10px;
+    }
+  }
+  

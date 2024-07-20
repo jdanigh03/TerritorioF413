@@ -6,6 +6,8 @@ import Footer from './componentes/general/Footer'
 import Banner from './componentes/inicio/Banner'
 import Publicaciones from './componentes/inicio/Publicaciones'
 import SubirPublicaciones from './componentes/publicaciones/SubirPublicaciones'
+import QuienesSomos from './componentes/QuienesSomos/QuienesSomos'
+import Inscribirse from './componentes/Inscribirse/Inscribirse'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,9 +18,11 @@ function App() {
       <br />
       <BarraNavegacion/>
       <br />
-      <Banner/>
+      {/* <Banner/>
       <Publicaciones/>
-      <SubirPublicaciones/>
+      <SubirPublicaciones/> */}
+      {/* <QuienesSomos/> */}
+      <Inscribirse/>
       <Footer/>
     </>
   )

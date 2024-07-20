@@ -1,0 +1,62 @@
+.inscribirse-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #111111;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .inscribirse-title {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .inscribirse-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 20px; /* Añadir margen a la derecha */
+  }
+  
+  .inscribirse-form input,
+  .inscribirse-form select,
+  .inscribirse-form textarea {
+    margin-bottom: 15px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .inscribirse-form button {
+    padding: 10px;
+    background-color: #ff4a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .inscribirse-form button:hover {
+    background-color: #e03d3d;
+  }
+  
+  .condiciones-medicas {
+    display: none;
+  }
+  
+  .condiciones-medicas.visible {
+    display: block;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+  }
+  
