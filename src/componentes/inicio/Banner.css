@@ -1,7 +1,9 @@
+/* Banner.css */
+
 .banner-container {
   position: relative;
   width: auto;
-  height: 175px; 
+  height: 175px;
   background-size: cover;
   background-position: center;
   display: flex;
@@ -15,7 +17,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .banner-content {
@@ -23,36 +25,59 @@
   display: flex;
   align-items: center;
   color: white;
-  text-align: center; 
-  padding: 0 10px; 
+  text-align: center;
+  padding: 0 10px;
   top: 40px;
+  flex-direction: column; /* Ensure items are stacked vertically for mobile */
 }
 
 .contact-button {
-  background-color: #00FF00; 
+  background-color: #00FF00;
   color: black;
-  padding: 8px 16px; 
+  padding: 8px 16px;
   border: none;
-  border-radius: 5px; 
-  font-size: 0.6rem; 
+  border-radius: 5px;
+  font-size: 0.6rem;
   font-weight: bold;
   cursor: pointer;
-  margin-right: 70px;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
   transition: background-color 0.3s ease;
 }
 
 .contact-button:hover {
-  background-color: #00CC00; 
+  background-color: #00CC00;
 }
 
 .banner-title {
-  font-size: 1.2rem; 
+  font-size: 1.2rem;
   font-weight: bold;
-  line-height: 1.2; 
+  line-height: 1.2;
   margin: 0;
 }
 
 .highlight {
-  color: #d0d3d0; 
+  color: #d0d3d0;
+}
+
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  .banner-container {
+    height: 300px; /* Adjust height for larger screens */
+  }
+
+  .banner-content {
+    flex-direction: row; /* Align items in a row for desktop */
+    justify-content: center; /* Center items horizontally */
+  }
+
+  .contact-button {
+    font-size: 1rem; /* Increase button font size */
+    padding: 10px 20px; /* Increase button padding */
+    margin-right: 150px; /* Add more space between button and title */
+    margin-bottom: 0; /* Remove bottom margin for desktop view */
+  }
+
+  .banner-title {
+    font-size: 3rem; /* Increase title font size */
+  }
 }
