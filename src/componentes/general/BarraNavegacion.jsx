@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import "./BarraNavegacion.css";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './BarraNavegacion.css';
 
 const BarraNavegacion = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -8,25 +9,38 @@ const BarraNavegacion = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
+  const handleScrollToFooter = () => {
+    const footer = document.getElementById('footer');
+    if (footer) {
+      footer.scrollIntoView({ behavior: 'smooth' });
+    }
+    setDropdownVisible(false);
+  };
+
   return (
     <>
       <nav className="barra-navegacion">
         <button className="dropdown-button" onClick={toggleDropdown}>
-          &#9776; 
+          &#9776;
         </button>
         {dropdownVisible && (
           <ul className="dropdown-menu">
-            <li className="dropdown-item">Inicio</li>
-            <li className="dropdown-item">Quienes Somos</li>
-            <li className="dropdown-item">Contacto</li>
-            <li className="dropdown-item">Inscribirse</li>
+            <li className="dropdown-item">
+              <Link to="/" onClick={() => setDropdownVisible(false)} className="nav-button">Inicio</Link>
+            </li>
+            <li className="dropdown-item">
+              <Link to="/quien-somos" onClick={() => setDropdownVisible(false)} className="nav-button">Quienes Somos</Link>
+            </li>
+            <li className="dropdown-item nav-button" onClick={handleScrollToFooter}>Contacto</li>
+            <li className="dropdown-item">
+              <Link to="/registrarse" onClick={() => setDropdownVisible(false)} className="nav-button">Inscribirse</Link>
+            </li>
           </ul>
         )}
       </nav>
-
-      <br />
     </>
   );
 };
 
 export default BarraNavegacion;
+ 
