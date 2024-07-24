@@ -54,7 +54,7 @@ const Inscribirse = () => {
 
   return (
     <div className="inscribirse-container">
-      <h2 className="inscribirse-title">Inscribirse</h2>
+      <h2 className="inscribirse-title">Registrarse</h2>
       <form className="inscribirse-form" onSubmit={handleSubmit}>
         <input
           type="text"

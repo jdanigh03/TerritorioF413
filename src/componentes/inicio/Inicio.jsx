@@ -13,6 +13,7 @@ const Inicio = () => {
     <br />
     <BarraNavegacion/>
     <br />
+    <br />
     <Banner/>
     <Publicaciones/>
     <Ofertas/>
