@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { db } from '../../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 import './Inscribirse.css';
 
 const Inscribirse = () => {
@@ -24,7 +26,7 @@ const Inscribirse = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let newErrores = {};
@@ -38,18 +40,25 @@ const Inscribirse = () => {
       return;
     }
 
-    setInscripciones([...inscripciones, formData]);
-    setFormData({
-      nombre: '',
-      edad: '',
-      genero: '',
-      telefono: '',
-      correo: '',
-      experiencia: '',
-      lesiones: '',
-      detallesLesiones: ''
-    });
-    setErrores({});
+    try {
+      await addDoc(collection(db, 'inscripciones'), formData);
+      alert('Inscripción exitosa!');
+      setInscripciones([...inscripciones, formData]);
+      setFormData({
+        nombre: '',
+        edad: '',
+        genero: '',
+        telefono: '',
+        correo: '',
+        experiencia: '',
+        lesiones: '',
+        detallesLesiones: ''
+      });
+      setErrores({});
+    } catch (error) {
+      console.error('Error al añadir documento: ', error);
+      alert('Error al inscribirse, por favor intente nuevamente.');
+    }
   };
 
   return (
