@@ -33,7 +33,7 @@ const BarraNavegacion = () => {
             </li>
             <li className="dropdown-item nav-button" onClick={handleScrollToFooter}>Contacto</li>
             <li className="dropdown-item">
-              <Link to="/registrarse" onClick={() => setDropdownVisible(false)} className="nav-button">Inscribirse</Link>
+              <Link to="/registrarse" onClick={() => setDropdownVisible(false)} className="nav-button">Registrarse</Link>
             </li>
           </ul>
         )}

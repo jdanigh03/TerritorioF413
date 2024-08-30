@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { db } from '../../firebaseConfig';
+import { db } from '../../firebaseConfig'; 
 import { collection, addDoc } from 'firebase/firestore';
 import './Inscribirse.css';
 
 const Inscribirse = () => {
   const [formData, setFormData] = useState({
-    nombre: '',
-    edad: '',
-    genero: '',
-    telefono: '',
-    correo: '',
-    experiencia: '',
-    lesiones: '',
+    NombreUsuario: '',
+    Edad: '',
+    Genero: '',
+    Telefono: '',
+    Correo: '',
+    Experiencia: '',
+    CondicionMedica: '',
     detallesLesiones: ''
   });
 
@@ -31,8 +31,8 @@ const Inscribirse = () => {
 
     let newErrores = {};
 
-    if (inscripciones.some((inscripcion) => inscripcion.correo === formData.correo)) {
-      newErrores.correo = 'Este correo ya está registrado.';
+    if (inscripciones.some((inscripcion) => inscripcion.Correo === formData.Correo)) {
+      newErrores.Correo = 'Este correo ya está registrado.';
     }
 
     if (Object.keys(newErrores).length > 0) {
@@ -41,17 +41,18 @@ const Inscribirse = () => {
     }
 
     try {
-      await addDoc(collection(db, 'inscripciones'), formData);
+      // Subir los datos a Firebase
+      await addDoc(collection(db, 'RegistroUsuarios'), formData);
       alert('Inscripción exitosa!');
       setInscripciones([...inscripciones, formData]);
       setFormData({
-        nombre: '',
-        edad: '',
-        genero: '',
-        telefono: '',
-        correo: '',
-        experiencia: '',
-        lesiones: '',
+        NombreUsuario: '',
+        Edad: '',
+        Genero: '',
+        Telefono: '',
+        Correo: '',
+        Experiencia: '',
+        CondicionMedica: '',
         detallesLesiones: ''
       });
       setErrores({});
@@ -67,68 +68,68 @@ const Inscribirse = () => {
       <form className="inscribirse-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          name="nombre"
+          name="NombreUsuario"
           placeholder="Nombre completo"
-          value={formData.nombre}
+          value={formData.NombreUsuario}
           onChange={handleChange}
           required
         />
         <input
           type="number"
-          name="edad"
+          name="Edad"
           placeholder="Edad"
-          value={formData.edad}
+          value={formData.Edad}
           onChange={handleChange}
           required
         />
         <select
-          name="genero"
-          value={formData.genero}
+          name="Genero"
+          value={formData.Genero}
           onChange={handleChange}
           required
         >
           <option value="">Género</option>
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
         </select>
         <input
           type="tel"
-          name="telefono"
+          name="Telefono"
           placeholder="Número de teléfono"
-          value={formData.telefono}
+          value={formData.Telefono}
           onChange={handleChange}
           required
         />
         <input
           type="email"
-          name="correo"
+          name="Correo"
           placeholder="Correo electrónico"
-          value={formData.correo}
+          value={formData.Correo}
           onChange={handleChange}
           required
         />
-        {errores.correo && <div className="error-message">{errores.correo}</div>}
+        {errores.Correo && <div className="error-message">{errores.Correo}</div>}
         <select
-          name="experiencia"
-          value={formData.experiencia}
+          name="Experiencia"
+          value={formData.Experiencia}
           onChange={handleChange}
           required
         >
           <option value="">¿Experiencia previa en gimnasios?</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
         </select>
         <select
-          name="lesiones"
-          value={formData.lesiones}
+          name="CondicionMedica"
+          value={formData.CondicionMedica}
           onChange={handleChange}
           required
         >
           <option value="">¿Lesiones o condiciones médicas relevantes?</option>
-          <option value="si">Sí</option>
-          <option value="no">No</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
         </select>
-        {formData.lesiones === 'si' && (
+        {formData.CondicionMedica === 'Sí' && (
           <textarea
             name="detallesLesiones"
             placeholder="Cuales"

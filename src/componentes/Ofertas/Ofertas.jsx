@@ -4,16 +4,30 @@ import './Ofertas.css';
 const Ofertas = () => {
   const ofertas = [
     {
-      titulo: 'Oferta 1',
+      titulo: 'Mensualidad',
       precio: 'Bs. 220',
-      descripcion: 'Descripción de la oferta 1',
+      descripcion: 'El costo de la suscripción al gimnasio es de Bs. 220y disfruta de todos los servicios que tenemos.',
     },
     {
-      titulo: 'Oferta 2',
-      precio: 'Bs 170',
-      descripcion: 'Descripción de la oferta 2',
+      titulo: 'Trimestral',
+      precio: 'Bs. 550',
+      descripcion: 'Si no te gusta estar pagando mes a mes tenemos esta oferta trimestral que podria venir bien para ti.',
     },
-    // Añade más ofertas según sea necesario
+    {
+      titulo: 'Quincenal',
+      precio: 'Bs. 140',
+      descripcion: 'Esta oferta es para 15 días en el gimnasio.',
+    },
+    {
+      titulo: '3 veces por semana',
+      precio: 'Bs. 170',
+      descripcion: 'Si no puedes venir todos los días con esta oferta te permite venir 3 veces por semana.',
+    },
+    {
+      titulo: 'Sesión',
+      precio: 'Bs. 20',
+      descripcion: 'El costo de sesión es lo que ves.',
+    },
   ];
 
   return (
