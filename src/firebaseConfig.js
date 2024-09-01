@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"; // Esto es para Firestore si planeas usarlo.
 import { getAnalytics } from "firebase/analytics";

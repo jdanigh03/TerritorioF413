@@ -1,37 +1,42 @@
-import React, { useState } from 'react';
-import { db } from '../../firebaseConfig'; 
-import { collection, addDoc } from 'firebase/firestore';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Inscribirse.css';
 
 const Inscribirse = () => {
-  const [formData, setFormData] = useState({
-    NombreUsuario: '',
-    Edad: '',
-    Genero: '',
-    Telefono: '',
-    Correo: '',
-    Experiencia: '',
-    CondicionMedica: '',
-    detallesLesiones: ''
-  });
+  // Estados para los valores de los inputs
+  const [nombreUsuario, setNombreUsuario] = useState('');
+  const [ci, setCI] = useState('');
+  const [edad, setEdad] = useState('');
+  const [genero, setGenero] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [experiencia, setExperiencia] = useState('');
+  const [condicionMedica, setCondicionMedica] = useState('');
+  const [detallesLesiones, setDetallesLesiones] = useState('');
 
   const [errores, setErrores] = useState({});
   const [inscripciones, setInscripciones] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
+  // Leer datos desde el backend
+  useEffect(() => {
+    const fetchInscripciones = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/usuarios');
+        setInscripciones(response.data);
+      } catch (error) {
+        console.error('Error al obtener inscripciones:', error);
+      }
+    };
+
+    fetchInscripciones();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let newErrores = {};
 
-    if (inscripciones.some((inscripcion) => inscripcion.Correo === formData.Correo)) {
+    if (inscripciones.some((inscripcion) => inscripcion.Correo === correo)) {
       newErrores.Correo = 'Este correo ya está registrado.';
     }
 
@@ -41,24 +46,56 @@ const Inscribirse = () => {
     }
 
     try {
-      // Subir los datos a Firebase
-      await addDoc(collection(db, 'RegistroUsuarios'), formData);
-      alert('Inscripción exitosa!');
-      setInscripciones([...inscripciones, formData]);
-      setFormData({
-        NombreUsuario: '',
-        Edad: '',
-        Genero: '',
-        Telefono: '',
-        Correo: '',
-        Experiencia: '',
-        CondicionMedica: '',
-        detallesLesiones: ''
+      await axios.post('http://localhost:5000/api/usuarios', {
+        NombreUsuario: nombreUsuario,
+        CI: ci,
+        Edad: edad,
+        Genero: genero,
+        Telefono: telefono,
+        Correo: correo,
+        Experiencia: experiencia,
+        CondicionMedica: condicionMedica,
+        detallesLesiones: detallesLesiones
       });
+
+      alert('Inscripción exitosa!');
+      setInscripciones([...inscripciones, {
+        NombreUsuario: nombreUsuario,
+        CI: ci,
+        Edad: edad,
+        Genero: genero,
+        Telefono: telefono,
+        Correo: correo,
+        Experiencia: experiencia,
+        CondicionMedica: condicionMedica,
+        detallesLesiones: detallesLesiones
+      }]);
+      
+      // Limpiar los campos del formulario
+      setNombreUsuario('');
+      setCI('');
+      setEdad('');
+      setGenero('');
+      setTelefono('');
+      setCorreo('');
+      setExperiencia('');
+      setCondicionMedica('');
+      setDetallesLesiones('');
       setErrores({});
     } catch (error) {
-      console.error('Error al añadir documento: ', error);
+      console.error('Error al inscribirse:', error);
       alert('Error al inscribirse, por favor intente nuevamente.');
+    }
+  };
+
+  const handleDelete = async (ci) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/usuarios/${ci}`);
+      setInscripciones(inscripciones.filter((inscripcion) => inscripcion.CI !== ci));
+      alert('Usuario eliminado exitosamente!');
+    } catch (error) {
+      console.error('Error al eliminar el usuario:', error);
+      alert('Error al eliminar el usuario, por favor intente nuevamente.');
     }
   };
 
@@ -68,24 +105,28 @@ const Inscribirse = () => {
       <form className="inscribirse-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          name="NombreUsuario"
           placeholder="Nombre completo"
-          value={formData.NombreUsuario}
-          onChange={handleChange}
+          value={nombreUsuario}
+          onChange={(e) => setNombreUsuario(e.target.value)}
           required
         />
         <input
           type="number"
-          name="Edad"
+          placeholder='Carnet de identidad'
+          value={ci}
+          onChange={(e) => setCI(e.target.value)}
+          required
+        />
+        <input
+          type="number"
           placeholder="Edad"
-          value={formData.Edad}
-          onChange={handleChange}
+          value={edad}
+          onChange={(e) => setEdad(e.target.value)}
           required
         />
         <select
-          name="Genero"
-          value={formData.Genero}
-          onChange={handleChange}
+          value={genero}
+          onChange={(e) => setGenero(e.target.value)}
           required
         >
           <option value="">Género</option>
@@ -94,25 +135,22 @@ const Inscribirse = () => {
         </select>
         <input
           type="tel"
-          name="Telefono"
           placeholder="Número de teléfono"
-          value={formData.Telefono}
-          onChange={handleChange}
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
           required
         />
         <input
           type="email"
-          name="Correo"
           placeholder="Correo electrónico"
-          value={formData.Correo}
-          onChange={handleChange}
+          value={correo}
+          onChange={(e) => setCorreo(e.target.value)}
           required
         />
         {errores.Correo && <div className="error-message">{errores.Correo}</div>}
         <select
-          name="Experiencia"
-          value={formData.Experiencia}
-          onChange={handleChange}
+          value={experiencia}
+          onChange={(e) => setExperiencia(e.target.value)}
           required
         >
           <option value="">¿Experiencia previa en gimnasios?</option>
@@ -120,27 +158,34 @@ const Inscribirse = () => {
           <option value="No">No</option>
         </select>
         <select
-          name="CondicionMedica"
-          value={formData.CondicionMedica}
-          onChange={handleChange}
+          value={condicionMedica}
+          onChange={(e) => setCondicionMedica(e.target.value)}
           required
         >
           <option value="">¿Lesiones o condiciones médicas relevantes?</option>
           <option value="Sí">Sí</option>
           <option value="No">No</option>
         </select>
-        {formData.CondicionMedica === 'Sí' && (
+        {condicionMedica === 'Sí' && (
           <textarea
-            name="detallesLesiones"
             placeholder="Cuales"
-            value={formData.detallesLesiones}
-            onChange={handleChange}
+            value={detallesLesiones}
+            onChange={(e) => setDetallesLesiones(e.target.value)}
             className="condiciones-medicas visible"
             required
           />
         )}
         <button type="submit">Enviar</button>
       </form>
+      <h2>Lista de Inscripciones</h2>
+      <ul>
+        {inscripciones.map((inscripcion) => (
+          <li key={inscripcion.CI}>
+            {inscripcion.NombreUsuario} - {inscripcion.CI}
+            <button onClick={() => handleDelete(inscripcion.CI)}>Eliminar</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
