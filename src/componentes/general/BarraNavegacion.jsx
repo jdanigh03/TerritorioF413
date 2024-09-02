@@ -37,10 +37,12 @@ const BarraNavegacion = () => {
             </li>
           </ul>
         )}
+        <Link to="/verificar-membresia" className="verificar-membresia-button">Verificar Membresía</Link>
       </nav>
     </>
   );
 };
 
 export default BarraNavegacion;
+
  

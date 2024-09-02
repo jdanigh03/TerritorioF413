@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Inicio from './componentes/inicio/Inicio';
 import Registrarse from './componentes/Inscribirse/Registrarse';
 import QuienSomos from './componentes/QuienesSomos/QuienSomos';
+import DefinirPantalla from './componentes/Membresia/DefinirPantalla';
+import VerificarPantalla from './componentes/Membresia/VerificarPantalla';
 
 const Rutas = () => {
   return (
@@ -11,6 +13,8 @@ const Rutas = () => {
         <Route path="/" element={<Inicio />} />
         <Route path="/registrarse" element={<Registrarse />} />
         <Route path="/quien-somos" element={<QuienSomos />} />
+        <Route path="/definir-membresia" element={<DefinirPantalla/>}/>
+        <Route path="/verificar-membresia" element={<VerificarPantalla/>}/>
       </Routes>
     </Router>
   );

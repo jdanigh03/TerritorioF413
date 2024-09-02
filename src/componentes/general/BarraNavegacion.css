@@ -1,6 +1,10 @@
 .barra-navegacion {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px; /* Ajusta según sea necesario */
 }
 
 .dropdown-button {
@@ -43,5 +47,21 @@
 }
 
 .nav-button:hover {
+  background-color: #555;
+}
+
+.verificar-membresia-button {
+  background-color: #cf5322;
+  color: white;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.verificar-membresia-button:hover {
   background-color: #555;
 }

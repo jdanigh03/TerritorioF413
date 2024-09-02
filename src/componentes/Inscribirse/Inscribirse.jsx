@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { db } from '../../firebaseConfig.js'; 
+import { collection, addDoc } from 'firebase/firestore';
 import './Inscribirse.css';
 
 const Inscribirse = () => {
-  // Estados para los valores de los inputs
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [ci, setCI] = useState('');
   const [edad, setEdad] = useState('');
@@ -14,64 +14,21 @@ const Inscribirse = () => {
   const [condicionMedica, setCondicionMedica] = useState('');
   const [detallesLesiones, setDetallesLesiones] = useState('');
 
-  const [errores, setErrores] = useState({});
-  const [inscripciones, setInscripciones] = useState([]);
-
-  // Leer datos desde el backend
-  useEffect(() => {
-    const fetchInscripciones = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/usuarios');
-        setInscripciones(response.data);
-      } catch (error) {
-        console.error('Error al obtener inscripciones:', error);
-      }
-    };
-
-    fetchInscripciones();
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    let newErrores = {};
-
-    if (inscripciones.some((inscripcion) => inscripcion.Correo === correo)) {
-      newErrores.Correo = 'Este correo ya está registrado.';
-    }
-
-    if (Object.keys(newErrores).length > 0) {
-      setErrores(newErrores);
-      return;
-    }
-
     try {
-      await axios.post('http://localhost:5000/api/usuarios', {
-        NombreUsuario: nombreUsuario,
-        CI: ci,
-        Edad: edad,
-        Genero: genero,
-        Telefono: telefono,
-        Correo: correo,
-        Experiencia: experiencia,
-        CondicionMedica: condicionMedica,
-        detallesLesiones: detallesLesiones
+      await addDoc(collection(db, 'Clientes'), {
+        nombreUsuario,
+        ci,
+        edad,
+        genero,
+        telefono,
+        correo,
+        experiencia,
+        condicionMedica,
+        detallesLesiones: condicionMedica === 'Sí' ? detallesLesiones : '',
       });
-
-      alert('Inscripción exitosa!');
-      setInscripciones([...inscripciones, {
-        NombreUsuario: nombreUsuario,
-        CI: ci,
-        Edad: edad,
-        Genero: genero,
-        Telefono: telefono,
-        Correo: correo,
-        Experiencia: experiencia,
-        CondicionMedica: condicionMedica,
-        detallesLesiones: detallesLesiones
-      }]);
-      
-      // Limpiar los campos del formulario
+      alert('Datos guardados correctamente');
       setNombreUsuario('');
       setCI('');
       setEdad('');
@@ -81,21 +38,9 @@ const Inscribirse = () => {
       setExperiencia('');
       setCondicionMedica('');
       setDetallesLesiones('');
-      setErrores({});
     } catch (error) {
-      console.error('Error al inscribirse:', error);
-      alert('Error al inscribirse, por favor intente nuevamente.');
-    }
-  };
-
-  const handleDelete = async (ci) => {
-    try {
-      await axios.delete(`http://localhost:5000/api/usuarios/${ci}`);
-      setInscripciones(inscripciones.filter((inscripcion) => inscripcion.CI !== ci));
-      alert('Usuario eliminado exitosamente!');
-    } catch (error) {
-      console.error('Error al eliminar el usuario:', error);
-      alert('Error al eliminar el usuario, por favor intente nuevamente.');
+      console.error('Error al guardar los datos: ', error);
+      alert('Hubo un error al guardar los datos');
     }
   };
 
@@ -112,7 +57,7 @@ const Inscribirse = () => {
         />
         <input
           type="number"
-          placeholder='Carnet de identidad'
+          placeholder="Carnet de identidad"
           value={ci}
           onChange={(e) => setCI(e.target.value)}
           required
@@ -147,7 +92,6 @@ const Inscribirse = () => {
           onChange={(e) => setCorreo(e.target.value)}
           required
         />
-        {errores.Correo && <div className="error-message">{errores.Correo}</div>}
         <select
           value={experiencia}
           onChange={(e) => setExperiencia(e.target.value)}
@@ -177,15 +121,6 @@ const Inscribirse = () => {
         )}
         <button type="submit">Enviar</button>
       </form>
-      <h2>Lista de Inscripciones</h2>
-      <ul>
-        {inscripciones.map((inscripcion) => (
-          <li key={inscripcion.CI}>
-            {inscripcion.NombreUsuario} - {inscripcion.CI}
-            <button onClick={() => handleDelete(inscripcion.CI)}>Eliminar</button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
