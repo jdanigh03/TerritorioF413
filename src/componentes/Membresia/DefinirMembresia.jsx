@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import './DefinirMembresia.css';
 
 const DefinirMembresia = () => {
@@ -8,21 +9,24 @@ const DefinirMembresia = () => {
   const [tipoMembresia, setTipoMembresia] = useState('');
   const [otroTipo, setOtroTipo] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const nuevaMembresia = {
-      ci: ci,
-      inicioMembresia: new Date(inicioMembresia),
-      finMembresia: new Date(finMembresia),
-      tipoMembresia: tipoMembresia === 'Otro' ? otroTipo : tipoMembresia,
+      ClienteCI: ci,
+      FechaInicio: new Date(inicioMembresia),
+      FechaFin: new Date(finMembresia),
+      TipoMembresia: tipoMembresia === 'Otro' ? otroTipo : tipoMembresia,
     };
 
-    // Aquí iría la lógica para guardar la nueva membresía en Firebase
+    try {
+      const db = getFirestore();
+      const docRef = await addDoc(collection(db, 'Membresias'), nuevaMembresia);
+      console.log('Membresía registrada con ID:', docRef.id);
+    } catch (error) {
+      console.error('Error al agregar la membresía:', error);
+    }
 
-    console.log(nuevaMembresia);
-
-    // Resetear el formulario después de enviarlo
     setCI('');
     setInicioMembresia('');
     setFinMembresia('');

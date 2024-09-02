@@ -1,17 +1,40 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Importa Link
-import './VerificarMembresia.css'; // Importa el archivo CSS
+import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
+import './VerificarMembresia.css';
 
 const VerificarMembresia = () => {
   const [nombre, setNombre] = useState('');
   const [ci, setCi] = useState('');
   const [verificacionCorrecta, setVerificacionCorrecta] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [mensajeModal, setMensajeModal] = useState('');
 
-  const handleVerificar = () => {
-    // Lógica para verificar membresía
-    const estaEnRango = Math.random() > 0.5; // Simulación de verificación
+  const handleVerificar = async () => {
+    const db = getFirestore();
+    const q = query(collection(db, 'Membresias'), where('ClienteCI', '==', ci));
+    const querySnapshot = await getDocs(q);
+
+    let estaEnRango = false;
+    const fechaActual = new Date();
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const fechaInicio = data.FechaInicio.toDate(); 
+      const fechaFin = data.FechaFin.toDate(); 
+
+      if (fechaInicio <= fechaActual && fechaFin >= fechaActual) {
+        estaEnRango = true;
+      }
+    });
+
     setVerificacionCorrecta(estaEnRango);
-    console.log('Verificar Membresía:', { nombre, ci, enRango: estaEnRango });
+    setMensajeModal(estaEnRango ? 'Su membresía está vigente.' : 'Su membresía no está vigente.');
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -46,14 +69,21 @@ const VerificarMembresia = () => {
             {verificacionCorrecta === false && <span className="checkmark">&#10007;</span>}
             Verificar
           </button>
-          <Link
-            to="/definir-membresia"
-            className="btn btn-definir"
-          >
-            Definir
+          <Link to="/definir-membresia" className="btn btn-definir">
+            Definir Membresía
           </Link>
         </div>
       </form>
+
+      {modalVisible && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Resultado de Verificación</h3>
+            <p>{mensajeModal}</p>
+            <button onClick={closeModal}>Cerrar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
