@@ -7,6 +7,23 @@ const SubirPublicaciones = ({ onUpload }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [password, setPassword] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
+  const [showPasswordForm, setShowPasswordForm] = useState(true);
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordSubmit = (e) => {
+    e.preventDefault();
+    if (password === 'LoreCesarFitness413') {
+      setAuthenticated(true);
+      setShowPasswordForm(false);
+    } else {
+      setError('Contraseña incorrecta. Inténtalo de nuevo.');
+    }
+  };
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -86,18 +103,35 @@ const SubirPublicaciones = ({ onUpload }) => {
 
   return (
     <div className="subir-publicaciones">
-      <input
-        type="file"
-        accept="image/*,video/*"
-        onChange={handleFileChange}
-      />
-      <button onClick={handleUpload} disabled={loading || !file}>
-        {loading ? 'Subiendo...' : 'Subir'}
-      </button>
-      {loading && <p>Cargando... Por favor, espera.</p>}
-      {error && <p className="error-message">{error}</p>}
-      {successMessage && <p className="success-message">{successMessage}</p>}
-      {file && <p>Archivo seleccionado: {file.name}</p>}
+      {showPasswordForm ? (
+        <form onSubmit={handlePasswordSubmit}>
+          <h2>Ingresa la contraseña</h2>
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            placeholder="Contraseña"
+            required
+          />
+          <button type="submit">Acceder</button>
+          {error && <p className="error-message">{error}</p>}
+        </form>
+      ) : (
+        <>
+          <input
+            type="file"
+            accept="image/*,video/*"
+            onChange={handleFileChange}
+          />
+          <button onClick={handleUpload} disabled={loading || !file}>
+            {loading ? 'Subiendo...' : 'Subir'}
+          </button>
+          {loading && <p>Cargando... Por favor, espera.</p>}
+          {error && <p className="error-message">{error}</p>}
+          {successMessage && <p className="success-message">{successMessage}</p>}
+          {file && <p>Archivo seleccionado: {file.name}</p>}
+        </>
+      )}
     </div>
   );
 };
