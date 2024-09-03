@@ -10,7 +10,7 @@ const BarraNavegacion = () => {
   };
 
   const handleScrollToFooter = () => {
-    const footer = document.getElementById('footer');
+    const footer = document.getElementById('piePagina');
     if (footer) {
       footer.scrollIntoView({ behavior: 'smooth' });
     }
@@ -44,5 +44,3 @@ const BarraNavegacion = () => {
 };
 
 export default BarraNavegacion;
-
- 
