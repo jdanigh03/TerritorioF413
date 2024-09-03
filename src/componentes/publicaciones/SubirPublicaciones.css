@@ -1,0 +1,56 @@
+/* SubirPublicaciones.css */
+
+.subir-publicaciones-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subir-publicaciones-container input[type="file"] {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .subir-publicaciones-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .subir-publicaciones-container button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .subir-publicaciones-container button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .subir-publicaciones-container p {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  
+  .subir-publicaciones-container p.error {
+    color: red;
+  }
+  
+  .subir-publicaciones-container p.success {
+    color: green;
+  }
+  

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { storage } from '../../firebaseConfig'; 
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
+import './SubirPublicaciones.css';
 
 const SubirPublicaciones = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -17,27 +21,38 @@ const SubirPublicaciones = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('imagen', selectedFile);
+    const fileType = selectedFile.type;
+    if (!fileType.startsWith('image/') && !fileType.startsWith('video/')) {
+      alert('Solo se permiten imágenes y videos');
+      return;
+    }
+
+    const storageRef = ref(storage, `imagenes/${selectedFile.name}`);
 
     setLoading(true);
     setError(null);
     setSuccessMessage(null);
 
     try {
-      const response = await axios.post('https://cors-anywhere.herokuapp.com/https://668ef8f5bf9912d4c9304864.mockapi.io/Publicaciones', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      // Subir archivo
+      await uploadBytes(storageRef, selectedFile);
+
+      // Obtener la URL de descarga
+      const url = await getDownloadURL(storageRef);
+      console.log('Archivo subido con éxito:', url);
+
+      // Guardar la URL en Firestore
+      await addDoc(collection(db, 'publicaciones'), {
+        url,
+        timestamp: new Date(),
       });
+
       setLoading(false);
-      setSuccessMessage('Imagen subida con éxito');
-      console.log('Imagen subida con éxito:', response.data);
-      // Aquí puedes actualizar la lista de publicaciones o hacer otra acción
+      setSuccessMessage('Archivo subido con éxito');
     } catch (error) {
+      console.error("Error al subir el archivo:", error);
       setLoading(false);
-      setError('Error al subir la imagen');
-      console.error('Error al subir la imagen:', error);
+      setError('Error al subir el archivo');
     }
   };
 

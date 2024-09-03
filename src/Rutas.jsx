@@ -5,6 +5,7 @@ import Registrarse from './componentes/Inscribirse/Registrarse';
 import QuienSomos from './componentes/QuienesSomos/QuienSomos';
 import DefinirPantalla from './componentes/Membresia/DefinirPantalla';
 import VerificarPantalla from './componentes/Membresia/VerificarPantalla';
+import SubirPantalla from './componentes/publicaciones/SubirPantalla';
 
 const Rutas = () => {
   return (
@@ -15,6 +16,7 @@ const Rutas = () => {
         <Route path="/quien-somos" element={<QuienSomos />} />
         <Route path="/definir-membresia" element={<DefinirPantalla/>}/>
         <Route path="/verificar-membresia" element={<VerificarPantalla/>}/>
+        <Route path="/subir-pantalla" element={<SubirPantalla/>}/>
       </Routes>
     </Router>
   );
