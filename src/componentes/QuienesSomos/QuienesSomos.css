@@ -1,57 +1,125 @@
 /* QuienesSomos.css */
 
 .quienes-somos-container {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 40px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+  position: relative;
+}
+
+.section-image {
+  width: 50%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.section-text {
+  width: 45%;
+  padding: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  margin-left: 20px;
+}
+
+.info-sections {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.info-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.info-text {
+  width: 100%;
+  padding: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.info-text h3 {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 10px;
+  color: white; /* Título en blanco */
+}
+#territorio-title {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .section {
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    gap: 40px;
   }
-  
-  .section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 20px;
-    position: relative;
-  }
-  
+
   .section-image {
-    width: 50%;
-    object-fit: cover;
-    border-radius: 10px;
+    width: 100%;
+    filter: brightness(50%);
   }
-  
+
   .section-text {
-    width: 50%;
+    width: 100%;
+    position: relative;
     padding: 20px;
-    color: white; /* Ajustar el color según el fondo de la imagen */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para mejorar la legibilidad del texto */
+    background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    margin-left: 0;
   }
-  
-  @media (max-width: 768px) {
-    .section {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .section-image {
-      width: 100%;
-      filter: brightness(50%);
-    }
-  
-    .section-text {
-      width: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      padding: 20px;
-      background-color: transparent; /* Elimina el fondo en la vista móvil */
-      border-radius: 10px;
-    }
+
+  .info-sections {
+    flex-direction: column;
+    gap: 20px;
   }
-  
+
+  .info-section {
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info-image {
+    width: 100%;
+    filter: brightness(50%);
+  }
+
+  .info-text {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+  }
+}

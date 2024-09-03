@@ -1,5 +1,3 @@
-/* Banner.css */
-
 .banner-container {
   position: relative;
   width: auto;
@@ -9,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 20px;
 }
 
 .banner-overlay {
@@ -28,7 +27,8 @@
   text-align: center;
   padding: 0 10px;
   top: 40px;
-  flex-direction: column; /* Ensure items are stacked vertically for mobile */
+  flex-direction: row; 
+  justify-content: center;
 }
 
 .contact-button {
@@ -40,7 +40,7 @@
   font-size: 0.6rem;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-right: 50px; /* Espacio entre el botón y el texto */
   transition: background-color 0.3s ease;
 }
 
@@ -62,22 +62,21 @@
 /* Media query for larger screens */
 @media (min-width: 768px) {
   .banner-container {
-    height: 300px; /* Adjust height for larger screens */
+    height: 300px; 
   }
 
   .banner-content {
-    flex-direction: row; /* Align items in a row for desktop */
-    justify-content: center; /* Center items horizontally */
+    justify-content: center;
+    
   }
 
   .contact-button {
-    font-size: 1rem; /* Increase button font size */
-    padding: 10px 20px; /* Increase button padding */
-    margin-right: 150px; /* Add more space between button and title */
-    margin-bottom: 0; /* Remove bottom margin for desktop view */
+    font-size: 1rem; 
+    padding: 10px 20px;
+    margin-right: 150px; 
   }
 
   .banner-title {
-    font-size: 3rem; /* Increase title font size */
+    font-size: 3rem;
   }
 }
