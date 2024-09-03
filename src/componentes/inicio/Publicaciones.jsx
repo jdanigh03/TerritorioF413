@@ -1,79 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './Publicaciones.css';
+
+const API_URL = 'https://66d691b3006bfbe2e64dc3f2.mockapi.io/publicaciones/gymPublicaciones';
 
 const Publicaciones = () => {
   const [publicaciones, setPublicaciones] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchPublicaciones = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        // Ordenar las publicaciones por ID en orden descendente y obtener las últimas 3
+        const ultimasPublicaciones = response.data.sort((a, b) => b.id - a.id).slice(0, 3);
+        setPublicaciones(ultimasPublicaciones);
+      } catch (error) {
+        console.error('Error al obtener las publicaciones:', error);
+      }
+    };
+
     fetchPublicaciones();
   }, []);
 
-  const fetchPublicaciones = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      console.log('Iniciando fetchPublicaciones');
-      const firestore = getFirestore();
-      const publicacionesRef = collection(firestore, 'publicaciones');
-      const q = query(publicacionesRef, orderBy('createdAt', 'desc'), limit(3));
-      const snapshot = await getDocs(q);
-      
-      if (snapshot.empty) {
-        console.log('No se encontraron publicaciones');
-        setPublicaciones([]);
-        return;
-      }
-
-      const publicacionesData = snapshot.docs.map(doc => doc.data());
-      const urlPromises = publicacionesData.map(async (publicacion) => {
-        try {
-          const url = await getDownloadURL(ref(getStorage(), `imagenes/${publicacion.name}`));
-          return { ...publicacion, url };
-        } catch (error) {
-          console.error('Error obteniendo URL para', publicacion.name, error);
-          return null;
-        }
-      });
-
-      const publicacionesConUrl = (await Promise.all(urlPromises)).filter(Boolean);
-      setPublicaciones(publicacionesConUrl);
-      console.log('Publicaciones establecidas:', publicacionesConUrl);
-    } catch (error) {
-      console.error('Error obteniendo publicaciones:', error);
-      setError(`Error al obtener las publicaciones: ${error.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div>
-      <h2>Publicaciones</h2>
-      {loading && <p>Cargando...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div className="publicaciones">
-        {publicaciones.map((publicacion, index) => (
-          <div key={index} className="publicacion">
-            {publicacion.type === 'mp4' ? (
-              <video 
-                src={publicacion.url} 
-                controls 
-                style={{ width: '100%', height: 'auto' }}
-              >
-                Tu navegador no soporta el elemento de video.
-              </video>
-            ) : (
-              <img 
-                src={publicacion.url} 
-                alt={`Publicación ${index + 1}`} 
-                style={{ width: '100%', height: 'auto' }}
-              />
-            )}
+      <div className="cards">
+        {publicaciones.map((pub) => (
+          <div key={pub.id} className="card">
+            <img src={pub.Publicacion} alt={`Publicación ${pub.id}`} />
           </div>
         ))}
       </div>

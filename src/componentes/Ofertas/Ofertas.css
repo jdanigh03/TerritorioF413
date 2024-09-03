@@ -2,7 +2,7 @@
 
 .contenedor-principal {
     padding: 20px;
-    background-color: #111; /* Color de fondo similar al del footer */
+    background-color: rgb(63, 62, 62); 
   }
   
   .titulo-ofertas {
@@ -46,7 +46,7 @@
   .oferta-precio {
     margin: 10px 0;
     font-size: 16px;
-    color: #f39c12; /* Color de precio */
+    color: #f39c12; 
   }
   
   .oferta-descripcion {
@@ -55,7 +55,6 @@
     color: #bbb;
   }
   
-  /* Estilos adicionales para dispositivos móviles */
   @media (max-width: 600px) {
     .contenedor-ofertas {
       flex-direction: column;
@@ -68,7 +67,6 @@
     }
   }
   
-  /* Estilos adicionales para vista de computadora */
   @media (min-width: 601px) {
     .card-oferta {
       width: 300px;

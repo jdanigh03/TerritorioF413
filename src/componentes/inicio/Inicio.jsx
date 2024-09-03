@@ -15,6 +15,7 @@ const Inicio = () => {
     <br />
     <br />
     <Banner/>
+    <br />  
     <Publicaciones/>
     <Ofertas/>
     <Footer/>

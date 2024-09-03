@@ -6,27 +6,27 @@ const Ofertas = () => {
     {
       titulo: 'Mensualidad',
       precio: 'Bs. 220',
-      descripcion: 'El costo de la suscripción al gimnasio es de Bs. 220y disfruta de todos los servicios que tenemos.',
+      descripcion: 'Aprovecha nuestra suscripción mensual a solo Bs. 220 y disfruta de acceso a nuestras instalaciones. Es la opción perfecta para mantener tu rutina de entrenamiento sin interrupciones',
     },
     {
       titulo: 'Trimestral',
       precio: 'Bs. 550',
-      descripcion: 'Si no te gusta estar pagando mes a mes tenemos esta oferta trimestral que podria venir bien para ti.',
+      descripcion: 'Si prefieres comprometerte a largo plazo y ahorrar, nuestra opción trimestral es ideal para ti. Con solo Bs. 550, asegura tres meses completos de entrenamiento sin preocuparte por los pagos mensuales.',
     },
     {
       titulo: 'Quincenal',
       precio: 'Bs. 140',
-      descripcion: 'Esta oferta es para 15 días en el gimnasio.',
+      descripcion: '¿Prefieres un compromiso más corto? Nuestra opción quincenal te ofrece 15 días de acceso a las instalaciones del gimnasio por solo Bs. 140. ¡Perfecto para quienes buscan flexibilidad!',
     },
     {
       titulo: '3 veces por semana',
       precio: 'Bs. 170',
-      descripcion: 'Si no puedes venir todos los días con esta oferta te permite venir 3 veces por semana.',
+      descripcion: 'Si no puedes asistir todos los días, no te preocupes. Por Bs. 170, esta oferta te permite entrenar tres veces por semana, adaptándose a tu estilo de vida sin comprometer tu progreso.',
     },
     {
       titulo: 'Sesión',
       precio: 'Bs. 20',
-      descripcion: 'El costo de sesión es lo que ves.',
+      descripcion: '¿Solo necesitas una sesión? Disfruta de una entrada única al gimnasio por solo Bs. 20. ¡Accede a todas nuestras instalaciones en una sola visita!',
     },
   ];
 
